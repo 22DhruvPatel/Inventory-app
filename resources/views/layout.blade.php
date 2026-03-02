@@ -6,7 +6,6 @@
     <title>Inventory Manager</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        
         .highlight { 
             font-weight: bold; 
             color: #0d6efd !important; 
@@ -20,9 +19,27 @@
 </head>
 <body>
     <header class="bg-dark text-white text-center py-4">
-        <h1> InventoryPro Manager</h1>
+        <h1>InventoryPro Manager</h1>
     </header>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('/') ? 'highlight' : '' }}" href="{{ url('/') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('manage') ? 'highlight' : '' }}" href="{{ url('/manage') }}">Manage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('search') ? 'highlight' : '' }}" href="{{ url('/search') }}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('about') ? 'highlight' : '' }}" href="{{ url('/about') }}">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container content-wrapper mt-4">
         @yield('content')
     </div>
