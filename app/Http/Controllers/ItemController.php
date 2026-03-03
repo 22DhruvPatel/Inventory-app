@@ -18,4 +18,11 @@ class ItemController extends Controller
 
         return view('manage', compact('items', 'itemToEdit'));
     }
+
+
+    public function store(Request $request)
+    {
+        Item::create($request->all());
+        return redirect('/manage');
+    }
 }
