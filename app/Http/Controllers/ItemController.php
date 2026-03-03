@@ -25,4 +25,10 @@ class ItemController extends Controller
         Item::create($request->all());
         return redirect('/manage');
     }
+
+    public function destroy(Item $item)
+    {
+        $item->delete();
+        return redirect('/manage');
+    }
 }
