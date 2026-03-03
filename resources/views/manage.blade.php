@@ -33,6 +33,33 @@
         </div>
     @endif
 
+    @if(request('action') == 'edit' && $itemToEdit)
+      <div class="card mb-4 p-3 border-warning">
+        <h4>Edit Item: {{ $itemToEdit->name }}</h4>
+        <form action="{{ url('/manage/'.$itemToEdit->id) }}" method="POST">
+          @csrf
+          @method('PUT')
+          <div class="row">
+            <div class="col-md-3">
+              <input type="text" name="name" class="form-control" value="{{ $itemToEdit->name }}" required>
+            </div>
+            <div class="col-md-4">
+              <input type="text" name="description" class="form-control" value="{{ $itemToEdit->description }}" required>
+            </div>
+            <div class="col-md-2">
+              <input type="text" name="product_code" class="form-control" value="{{ $itemToEdit->product_code }}" required>
+            </div>
+            <div class="col-md-2">
+              <input type="number" step="0.01" name="price" class="form-control" value="{{ $itemToEdit->price }}" required>
+            </div>
+            <div class="col-md-1">
+              <button type="submit" class="btn btn-warning">Edit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    @endif
+
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -52,9 +79,10 @@
                     <td>${{ number_format($item->price, 2) }}</td>
                     <td>
                         <form action="{{ url('/manage/'.$item->id) }}" method="POST" class="d-inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger text-white" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger text-white" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button> 
+                          <a href="{{ url('/manage?action=edit&id='.$item->id) }}" class="btn btn-sm btn-warning">Edit</a>
                         </form>
                     </td>
                 </tr>

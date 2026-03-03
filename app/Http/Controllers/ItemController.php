@@ -31,4 +31,11 @@ class ItemController extends Controller
         $item->delete();
         return redirect('/manage');
     }
+
+
+    public function update(Request $request, Item $item)
+    {
+        $item->update($request->all());
+        return redirect('/manage');
+    }
 }
